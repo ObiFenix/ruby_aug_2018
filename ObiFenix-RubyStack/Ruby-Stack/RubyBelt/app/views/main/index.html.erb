@@ -1,8 +1,0 @@
-<!-- USER LOGIN & REGISTRATION PAGE COMPONENT -->
-
-<div class="container">
-    <% if notice %><p id="notice"><%= notice %></p><% end %>
-    <% if session['form'] == 'login' %><%= render "login_form" %>
-    <% else %>                         <%= render "register_form" %>
-    <% end %>
-</div>

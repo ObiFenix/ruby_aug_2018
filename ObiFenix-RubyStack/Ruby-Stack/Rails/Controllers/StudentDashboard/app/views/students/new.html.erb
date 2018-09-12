@@ -5,7 +5,7 @@
 <div class="container">
     <h2>New Student</h2>
     <div class="row">
-        <form class="col s12 mt-4" action="/dojo/<%= session["dojo_id"] %>/students" method="POST">
+        <form class="col s12 mt-4" action="/dojo/<%= session["dojoid"] %>/students" method="POST">
             <!--
             =========================
             [ Error Display... if any
@@ -51,7 +51,7 @@
                     <select class="custom-select" id="branch" name="student[dojo_id]">
                         <!-- <option value="0" selected><span class="red-text">Select your dojo branch...</span></option> -->
 
-                        <option value="<%= session["dojo_id"] %>" selected><%= session["branch"] %></option>
+                        <option value="<%= @this_dojo.id %>" selected><%= @this_dojo.branch %></option>
                         <% if @dojos %><% @dojos.each do |dojo| %>
                         <option value="<%= dojo.id %>"><%= dojo.branch %></option>
                         <% end %><% end %>

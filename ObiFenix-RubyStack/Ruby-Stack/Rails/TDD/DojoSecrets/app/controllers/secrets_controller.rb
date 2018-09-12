@@ -7,7 +7,7 @@ class SecretsController < ApplicationController
   def create
     @secret = Secret.new(content: params[:Content], user_id: current_user.id)
     if @secret.save
-      redirect_to :back
+      redirect_to
     else
       flash[:errors] = "You must tell your secret"
       redirect_to :back

@@ -14,11 +14,23 @@
   </head>
 
   <body class="container-fluid">
-    <nav class="dark" style="position:fixed;">
+
+    <nav class="dark" style="position:fixed; z-index:1000">
+      <% unless current_manager %>
       <div class="nav-wrapper">
         <a href="/"><img src="/assets/codingdojo.png"</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a href="/">Home</a></li>
+          <% if session["form"] == "login"%>
+          <li><a href="/sessions/sw">Register</a></li><% else %>
+          <li><a href="/sessions/sw">Login</a></li><% end %>
+        </ul>
+      </div>
+
+      <% else %>
+      <div class="nav-wrapper">
+        <a href="/"><img src="/assets/codingdojo.png"</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="/">Dashboard</a></li>
           <% if session["page"] === 'student'%>
           <li><a href="/dojo/<%= session["dojoid"] %>/students/new">Add New Student</a></li>
           <% else %>
@@ -26,6 +38,7 @@
           <% end %>
         </ul>
       </div>
+      <% end %>
     </nav>
 
     <%= yield %>

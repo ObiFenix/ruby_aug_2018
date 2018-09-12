@@ -23,6 +23,7 @@ class StudentsController < ApplicationController
   # ====================
   def create
     @student = Student.create(validate_params)
+    @this_dojo = Dojo.find(params[:dojo_id])
     # @student.valid?
     respond_to do |format|
       if @student.save

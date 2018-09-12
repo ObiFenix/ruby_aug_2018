@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180810133107) do
+ActiveRecord::Schema.define(version: 20180826193844) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "dojos", force: :cascade do |t|
     t.string   "branch"
@@ -22,6 +25,18 @@ ActiveRecord::Schema.define(version: 20180810133107) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "managers", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.integer  "dojo_id"
+    t.string   "password_digest"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "managers", ["dojo_id"], name: "index_managers_on_dojo_id", using: :btree
+
   create_table "students", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -31,6 +46,8 @@ ActiveRecord::Schema.define(version: 20180810133107) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "students", ["dojo_id"], name: "index_students_on_dojo_id"
+  add_index "students", ["dojo_id"], name: "index_students_on_dojo_id", using: :btree
 
+  add_foreign_key "managers", "dojos"
+  add_foreign_key "students", "dojos"
 end
